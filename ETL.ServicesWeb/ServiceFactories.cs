@@ -15,5 +15,11 @@ namespace ETL.ServicesWeb
             var client = new Authentification.AuthorizationContractClient();
             return new AuthentificationService(client);
         }
+
+        public static IReportService CreateReportService()
+        {
+            var client = new Report.ReportContractClient();
+            return new ReportService(client);
+        }
     }
 }

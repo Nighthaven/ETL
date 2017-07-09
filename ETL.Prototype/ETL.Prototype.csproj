@@ -61,6 +61,8 @@
     </Compile>
     <Compile Include="Utilitaires\ConfigUtils.cs" />
     <Compile Include="Utilitaires\RelayCommand.cs" />
+    <Compile Include="ViewModels\Objects\PositionVehiculeViewModel.cs" />
+    <Compile Include="ViewModels\Objects\VehiculeViewModel.cs" />
     <Compile Include="ViewModels\VehiculePositionViewViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\VehiculesPositionView.xaml.cs">
@@ -119,7 +121,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Events\" />
-    <Folder Include="ViewModels\Objects\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Media\image_001_32_00.png" />

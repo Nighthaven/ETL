@@ -11,5 +11,6 @@ namespace ETL.BusinessLayer.Services.Interfaces
     {
         IAuthentificationToken Login(string pUsername, string pPassword);
         void CloseSession(IAuthentificationToken pToken);
+        IEnumerable<IPositionVehicule> GetPositions(IAuthentificationToken pToken);
     }
 }

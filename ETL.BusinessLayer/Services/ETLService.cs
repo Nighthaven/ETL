@@ -13,12 +13,15 @@ namespace ETL.BusinessLayer.Services
     internal class ETLService : Service, IETLService
     {
         private IAuthentificationService _authentificationService;
+        private IReportService _reportService;
 
-        internal ETLService(IAuthentificationService pAuthentificationService)
+        internal ETLService(IAuthentificationService pAuthentificationService, IReportService pReportService)
         {
             if (pAuthentificationService == null) throw new ArgumentNullException("pAuthentificationService");
+            if (pReportService == null) throw new ArgumentNullException("pReportService");
 
             _authentificationService = pAuthentificationService;
+            _reportService = pReportService;
         }
 
         public override void Dispose()
@@ -35,6 +38,7 @@ namespace ETL.BusinessLayer.Services
             if (pDispose)
             {
                 _authentificationService = null;
+                _reportService = null;
                 UnsubscribeEvents();
             }
             
@@ -48,6 +52,21 @@ namespace ETL.BusinessLayer.Services
             try
             {
                 return _authentificationService.Login(pUsername, pPassword);
+            }
+            catch (Exception exception)
+            {
+                SendError(exception.Message);
+                return null;
+            }
+        }
+
+        public IEnumerable<IPositionVehicule> GetPositions(IAuthentificationToken pToken)
+        {
+            if (CheckIsDisposed()) return null;
+
+            try
+            {
+                return _reportService.GetPositionsVehiculesForToday(pToken);
             }
             catch (Exception exception)
             {
