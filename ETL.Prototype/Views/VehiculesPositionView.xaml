@@ -3,14 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         mc:Ignorable="d"
         Title="ETL - Prototype - Étienne Faucher" Height="500" Width="1000"
         WindowStartupLocation="CenterScreen"
         Closing="Window_Closing">
     <DockPanel Margin="5">
-        <Border DockPanel.Dock="Bottom" Padding="5" BorderBrush="Black" BorderThickness="1" CornerRadius="5">
-
-        </Border>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
             <TextBlock Text="Nom d'usager:" FontWeight="Bold" Margin="0,0,5,0" VerticalAlignment="Center"/>
             <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Width="200" Margin="0,0,15,0"/>
@@ -25,14 +23,22 @@
                     <DockPanel DockPanel.Dock="Left">
                         <StackPanel DockPanel.Dock="Top">
                             <Button Content="Rafraîchir la liste" Command="{Binding RefreshCommand}" Margin="0,0,0,3" Width="100" HorizontalAlignment="Left"/>
-                            <ComboBox ItemsSource="{Binding Vehicules}" SelectedItem="{Binding SelectedVehicule}" DisplayMemberPath="StringToShow" Width="200" />
+                            <ComboBox ItemsSource="{Binding Vehicules}" SelectedItem="{Binding SelectedVehicule}" DisplayMemberPath="StringToShow" Width="300" HorizontalAlignment="Left" />
                         </StackPanel>
-                        <DockPanel>
-                            
+                        <DockPanel Margin="0,3">
+                            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Positions}" SelectedItem="{Binding SelectedPosition}" 
+                                      CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" SelectionMode="Single"
+                                      Width="300">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Latitude" Binding="{Binding Latitude}" IsReadOnly="True" Width="Auto"/>
+                                    <DataGridTextColumn Header="Longitude" Binding="{Binding Longitude}" IsReadOnly="True" Width="Auto"/>
+                                    <DataGridTextColumn Header="Heure" Binding="{Binding DateFormatted}" IsReadOnly="True" Width="*"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
                         </DockPanel>
                     </DockPanel>
                     <DockPanel>
-                        
+                        <m:Map x:Name="myMap" CredentialsProvider="kuBUj4KdvQ6EkS3kScjP~neSH0cznDsyrbYVSmXm6gg~AvtzS3Z36f_qTEC-Igw-y4v5WXcpc4T5qi0YIHxjEtNKWZM856EYRIj0d9_xiGKV" Mode="Road"/>
                     </DockPanel>
                 </DockPanel>
             </GroupBox>

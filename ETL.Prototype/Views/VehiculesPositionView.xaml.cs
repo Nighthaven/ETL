@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ETL.Prototype.ViewModels;
+using Microsoft.Maps.MapControl.WPF;
 
 namespace ETL.Prototype.Views
 {
@@ -36,6 +37,30 @@ namespace ETL.Prototype.Views
         private void BindViewModel()
         {
             ViewModel.ErrorOccured += ViewModel_ErrorOccured;
+            ViewModel.NavigateRequested += ViewModel_NavigateRequested;
+            ViewModel.ClearLocationRequested += ViewModel_ClearLocationRequested;
+        }
+
+        private void ViewModel_ClearLocationRequested(object sender, EventArgs e)
+        {
+            var location = new Location(0, 0);
+            myMap.Center = location;
+            myMap.ZoomLevel = 0;
+
+            myMap.Children.Clear();
+        }
+
+        private void ViewModel_NavigateRequested(double pLatitude, double pLongitude)
+        {
+            var location = new Location(pLatitude, pLongitude);
+            myMap.Center = location;
+            if (myMap.ZoomLevel < 12)
+                myMap.ZoomLevel = 12;
+
+            myMap.Children.Clear();
+            
+            var pin = new Pushpin() { Location = location };
+            myMap.Children.Add(pin);
         }
 
         private void ViewModel_ErrorOccured(object sender, BusinessLayer.Events.ErrorEventArgs pEventArgs)

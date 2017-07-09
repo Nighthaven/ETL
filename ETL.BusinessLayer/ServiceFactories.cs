@@ -13,8 +13,9 @@ namespace ETL.BusinessLayer
         public static IETLService CreateETLService()
         {
             var authentificationService = ServicesWeb.ServiceFactories.CreateAuthentificationService();
-            var reportService = ServicesWeb.ServiceFactories.CreateReportService();
-            return new ETLService(authentificationService, reportService);
+            var staticService = ServicesWeb.ServiceFactories.CreateStaticService();
+            var eventService = ServicesWeb.ServiceFactories.CreateEventService();
+            return new ETLService(authentificationService, staticService, eventService);
         }
     }
 }

@@ -4,61 +4,51 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ETL.BusinessObjects;
-using ETL.ServicesWeb.Report;
+using ETL.ServicesWeb.Static;
+using ETL.ServicesWeb.Event;
 
 namespace ETL.ServicesWeb
 {
     internal static class Extensions
     {
-        internal static IEnumerable<IPositionVehicule> ConvertToPositionsVehicules(this ReportResponseBaseOfPositionByVehicleReportGridView pReponse)
+        internal static IEnumerable<IVehicule> ConvertToVehicules(this GetVehiclesResponse pReponse)
         {
-            if (pReponse == null || pReponse.Views == null) return Enumerable.Empty<IPositionVehicule>();
-
-            var vehiculesPositions = pReponse.Views.Select(x => new { Vehicule = x.Vehicle, Position = x.Position, Date = x.Date }).ToList();
-
-            return vehiculesPositions.Select(x => ConvertToPositionVehicule(x.Position, x.Vehicule, x.Date));            
+            if (pReponse == null || pReponse.Vehicles == null) return Enumerable.Empty<IVehicule>();
+            
+            return pReponse.Vehicles.Select(x => ConvertToVehicule(x));            
         }
 
-        private static IVehicule ConvertToVehicule(this PositionByVehicleReportGridViewVehicle pVehicule)
+        private static IVehicule ConvertToVehicule(this Vehicle pVehicule)
         {
             if (pVehicule == null) throw new ArgumentNullException("pVehicule");
 
             return new Vehicule()
             {
-                ID = pVehicule.VehicleID,
-                Name = pVehicule.VehicleName,
+                ID = pVehicule.ID,
+                Name = pVehicule.Name,
                 PlateNumber = pVehicule.PlateNumber,
-                Make = pVehicule.VehicleMake,
-                Model = pVehicule.VehicleModel
+                Make = pVehicule.BrandName,
+                Model = pVehicule.Model
             };
         }
 
-        private static DateTime ConvertToDateTime(this PositionByVehicleReportGridViewDate pDateTime)
+        internal static IEnumerable<IPosition> ConvertToPositions(this GetPositionEventResponse pReponse)
         {
-            if (pDateTime == null) throw new ArgumentNullException("pDateTime");
+            if (pReponse == null || pReponse.PositionEvents == null) return Enumerable.Empty<IPosition>();
 
-            return pDateTime.DateTime;
+            return pReponse.PositionEvents.Select(x => ConvertToPosition(x));
         }
 
-        private static IPositionVehicule ConvertToPositionVehicule(PositionByVehicleReportGridViewPosition pPosition, PositionByVehicleReportGridViewVehicle pVehicule, PositionByVehicleReportGridViewDate pDate)
+        private static IPosition ConvertToPosition(this PositionEvent pPosition)
         {
             if (pPosition == null) throw new ArgumentNullException("pPosition");
-            if (pVehicule == null) throw new ArgumentNullException("pVehicule");
-            if (pDate == null) throw new ArgumentNullException("pDate");
-
-            var vehicule = pVehicule.ConvertToVehicule();
-            var datetime = pDate.ConvertToDateTime();
-
-            return new PositionVehicule()
+            
+            return new Position()
             {
-                Date = datetime,
-                Vehicule = vehicule,
-                EventID = pPosition.PositionEventID,
-                IsReverseGeocodeingCalculatedFlag = pPosition.IsReverseGeocodingCalculatedFlag,
                 Latitude = pPosition.Latitude,
                 Longitude = pPosition.Longitude,
-                MapLink = pPosition.MapLink,
-                ReverseGeocoding = pPosition.ReverseGeocoding
+                Date = pPosition.GPSDateTime,
+                TripEventID = pPosition.TripEventID
             };
         }
     }

@@ -16,10 +16,17 @@ namespace ETL.ServicesWeb
             return new AuthentificationService(client);
         }
 
-        public static IReportService CreateReportService()
+        public static IEventService CreateEventService()
         {
-            var client = new Report.ReportContractClient();
-            return new ReportService(client);
+            var client = new Event.EventContractClient();
+            return new EventService(client);
         }
+
+        public static IStaticService CreateStaticService()
+        {
+            var client = new Static.StaticContractClient();
+            return new StaticService(client);
+        }
+
     }
 }

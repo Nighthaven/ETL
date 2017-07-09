@@ -47,7 +47,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Connected Services\Report\Reference.cs">
+    <Compile Include="Connected Services\Event\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Static\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -56,9 +61,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceFactories.cs" />
     <Compile Include="Services\AuthentificationService.cs" />
+    <Compile Include="Services\EventService.cs" />
     <Compile Include="Services\Interfaces\IAuthentificationService.cs" />
-    <Compile Include="Services\Interfaces\IReportService.cs" />
-    <Compile Include="Services\ReportService.cs" />
+    <Compile Include="Services\Interfaces\IEventService.cs" />
+    <Compile Include="Services\Interfaces\IStaticService.cs" />
+    <Compile Include="Services\StaticService.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
@@ -81,152 +88,118 @@
     <None Include="Connected Services\Authentification\ETL.ServicesWeb.Authentification.OpenSessionResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetAccessoryDetailResponse.datasource">
+    <None Include="Connected Services\Event\ETL.ServicesWeb.Event.GetAccessoryEventResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetAccessoryDurationResponse.datasource">
+    <None Include="Connected Services\Event\ETL.ServicesWeb.Event.GetPositionEventResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetAccessoryDurationResponse1.datasource">
+    <None Include="Connected Services\Event\ETL.ServicesWeb.Event.GetTripEventResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetAccessoryResponse.datasource">
+    <None Include="Connected Services\Event\EventService.wsdl" />
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.AddLocationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetAlertEventDurationResponse.datasource">
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.ChangeCustomerResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetAlertEventDurationResponse1.datasource">
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.CustomerChangedResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetAvailabilityStateDurationResponse.datasource">
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.DeleteLocationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetAvailabilityStateDurationResponse1.datasource">
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.FindVehiclesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetBorderCrossingDurationResponse.datasource">
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.GetAccessibleCustomerResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetBorderCrossingDurationResponse1.datasource">
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.GetAccessibleCustomersResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetCommandDurationResponse.datasource">
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.GetCustomerOptionsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetCommandDurationResponse1.datasource">
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.GetCustomerOptionsResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetConnectionDurationResponse.datasource">
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.GetEmployeeGroupResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetConnectionDurationResponse1.datasource">
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.GetEmployeeGroupResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetCustomStateDurationResponse.datasource">
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.GetEmployeesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetCustomStateDurationResponse1.datasource">
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.GetEmployeesResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetDeferredTaskResponse.datasource">
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.GetFleetResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetDeferredTaskResponse1.datasource">
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.GetFleetsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetDriverIdentificationByVehicleDurationResponse.datasource">
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.GetLocationGroupsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetDriverIdentificationDurationByVehicleResponse.datasource">
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.GetLocationGroupsResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetDriverIdentificationDurationResponse.datasource">
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.GetLocationsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetDriverIdentificationDurationResponse1.datasource">
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.GetLocationsResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetInvoiceResponse.datasource">
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.GetNotificationGroupsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetInvoiceResponse1.datasource">
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.GetNotificationGroupsResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetMaintenancePreventiveResponse.datasource">
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.GetTerritoriesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetMaintenancePreventiveResponse1.datasource">
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.GetTerritoryGroupResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetMessagingCommunicationResponse.datasource">
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.GetTerritoryGroupsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetMessagingCommunicationResponse1.datasource">
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.GetTerritoryResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetOriginDestinationDetailResponse.datasource">
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.GetVehicleGroupResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetOriginDestinationDetailResponse1.datasource">
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.GetVehicleGroupsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetPositionDetailViewResponse.datasource">
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.GetVehiclesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetPositionsResponse.datasource">
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.GetVehiclesResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetStateRuleExceptionDurationResponse.datasource">
+    <None Include="Connected Services\Static\ETL.ServicesWeb.Static.PersistResultsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetStateRuleExceptionDurationResponse1.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetTerritoryCrossingDurationResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetTerritoryCrossingDurationResponse1.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetTripDurationResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetTripDurationResponse1.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetUserAuthenticationDurationResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\Report\ETL.ServicesWeb.Report.GetUserAuthenticationDurationResponse1.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\Report\ReportService.wsdl" />
+    <None Include="Connected Services\Static\StaticService.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\Authentification\" />
-    <WCFMetadataStorage Include="Connected Services\Report\" />
+    <WCFMetadataStorage Include="Connected Services\Event\" />
+    <WCFMetadataStorage Include="Connected Services\Static\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ETL.BusinessObjects\ETL.BusinessObjects.csproj">
       <Project>{1ca535b0-b14a-4335-9d8d-2287d353d6ec}</Project>
       <Name>ETL.BusinessObjects</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\Report\ReportService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\Report\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\Report\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\Report\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\Authentification\AuthenticationService.disco" />
@@ -239,6 +212,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\Authentification\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Event\EventService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Event\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Event\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Event\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Static\StaticService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Static\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Static\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Static\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

@@ -41,9 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IAuthentificationToken.cs" />
-    <Compile Include="Interfaces\IPositionVehicule.cs" />
+    <Compile Include="Interfaces\IPosition.cs" />
     <Compile Include="Interfaces\IVehicule.cs" />
-    <Compile Include="PositionVehicule.cs" />
+    <Compile Include="Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AuthentificationToken.cs" />
     <Compile Include="Vehicule.cs" />

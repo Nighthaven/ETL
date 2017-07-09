@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Maps.MapControl.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Maps.MapControl.WPF.1.0.0.3\lib\net40-Client\Microsoft.Maps.MapControl.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -59,9 +62,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Events\NavigateEventHandler.cs" />
     <Compile Include="Utilitaires\ConfigUtils.cs" />
     <Compile Include="Utilitaires\RelayCommand.cs" />
-    <Compile Include="ViewModels\Objects\PositionVehiculeViewModel.cs" />
+    <Compile Include="ViewModels\Objects\PositionViewModel.cs" />
     <Compile Include="ViewModels\Objects\VehiculeViewModel.cs" />
     <Compile Include="ViewModels\VehiculePositionViewViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
@@ -87,6 +91,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -119,9 +124,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Events\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Media\image_001_32_00.png" />
     <Resource Include="Media\image_002_32_00.png" />

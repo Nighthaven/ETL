@@ -14,8 +14,8 @@ namespace ETL.Prototype.ViewModels
         public string PlateNumber { get; private set; }
         public string Make { get; private set; }
         public string Model { get; private set; }
-
         public string StringToShow { get { return string.Format("{0} - {1}", Name, PlateNumber); } }
+        internal IVehicule Data { get; private set; }
 
         public VehiculeViewModel(IVehicule pVehicule)
         {
@@ -26,6 +26,9 @@ namespace ETL.Prototype.ViewModels
             PlateNumber = pVehicule.PlateNumber;
             Make = pVehicule.Make;
             Model = pVehicule.Model;
+            Data = pVehicule;
         }
+
+
     }
 }

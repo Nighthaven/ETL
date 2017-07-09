@@ -10,17 +10,19 @@ using ETL.BusinessLayer.Events;
 using ETL.Prototype.Utilitaires;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
+using ETL.Prototype.Events;
 
 namespace ETL.Prototype.ViewModels
 {
     public class VehiculePositionViewViewModel : ViewModelBase
     {
         public event ErrorEventHandler ErrorOccured;
+        public event NavigateEventHandler NavigateRequested;
+        public event EventHandler ClearLocationRequested;
 
         private string _username;
         private string _password;
         private IAuthentificationToken _token;
-        private readonly List<PositionVehiculeViewModel> _allPositions;
 
         private ObservableCollection<VehiculeViewModel> _vehicules;
         public ObservableCollection<VehiculeViewModel> Vehicules
@@ -28,25 +30,7 @@ namespace ETL.Prototype.ViewModels
             get { return _vehicules; }
             private set { SetField(ref _vehicules, value); }
         }
-
-        private ObservableCollection<PositionVehiculeViewModel> _positions;
-        public ObservableCollection<PositionVehiculeViewModel> Positions
-        {
-            get { return _positions; }
-            private set { SetField(ref _positions, value); }
-        }
-
-        private PositionVehiculeViewModel _selectedPosition;
-        public PositionVehiculeViewModel SelectedPosition
-        {
-            get { return _selectedPosition; }
-            set
-            {
-                SetField(ref _selectedPosition, value);
-                SelectedPositionChanged();
-            } 
-        }
-
+                
         private VehiculeViewModel _selectedVehicule;
         public VehiculeViewModel SelectedVehicule
         {
@@ -55,6 +39,24 @@ namespace ETL.Prototype.ViewModels
             {
                 SetField(ref _selectedVehicule, value);
                 SelectedVehiculeChanged();
+            }
+        }
+
+        private ObservableCollection<PositionViewModel> _positions;
+        public ObservableCollection<PositionViewModel> Positions
+        {
+            get { return _positions; }
+            private set { SetField(ref _positions, value); }
+        }
+
+        private PositionViewModel _selectedPosition;
+        public PositionViewModel SelectedPosition
+        {
+            get { return _selectedPosition; }
+            set
+            {
+                SetField(ref _selectedPosition, value);
+                SelectedPositionChanged();
             }
         }
 
@@ -103,14 +105,53 @@ namespace ETL.Prototype.ViewModels
 
         public VehiculePositionViewViewModel()
         {
-            _allPositions = new List<PositionVehiculeViewModel>();
-            Positions = new ObservableCollection<PositionVehiculeViewModel>();
             Vehicules = new ObservableCollection<VehiculeViewModel>();
+            Positions = new ObservableCollection<PositionViewModel>();
             Username = ConfigUtils.ReadSetting(Configs.CourrielETL);
             Password = ConfigUtils.ReadSetting(Configs.PasswordETL);
 
             PrepareCommands();
             FillViewModel();
+        }
+
+        private void SelectedPositionChanged()
+        {
+            if (SelectedPosition == null)
+            {
+                if (ClearLocationRequested != null)
+                    ClearLocationRequested(this, EventArgs.Empty);
+            }
+            else
+            { 
+                if (NavigateRequested != null)
+                    NavigateRequested(SelectedPosition.Latitude, SelectedPosition.Longitude);
+            }
+        }
+
+        private void SelectedVehiculeChanged()
+        {
+            FillPositions();
+        }
+
+        private void FillPositions()
+        {
+            SelectedPosition = null;
+            Positions.Clear();
+
+            if (!IsConnected || SelectedVehicule == null) return;
+
+            var positions = Enumerable.Empty<IPosition>();
+            using (var service = ServiceFactories.CreateETLService())
+            {
+                service.ErrorOccured += OnErrorOccured;
+                positions = service.GetPositions(Token, SelectedVehicule.Data);
+            }
+
+            if (positions == null) return;
+            foreach (var position in positions)
+            {
+                Positions.Add(new PositionViewModel(position));
+            }
         }
 
         private void PrepareCommands()
@@ -121,16 +162,13 @@ namespace ETL.Prototype.ViewModels
 
         private void RefreshCommandMethod(object sender)
         {
-            GetPositions();
-        }
+            var vehiculeID = SelectedVehicule == null ? (int?)null : SelectedVehicule.ID;
+            
 
-        private void SelectedPositionChanged()
-        {
-        }
+            FillVehicules();
 
-        private void SelectedVehiculeChanged()
-        {
-            FillPositions();
+            if (vehiculeID.HasValue)
+                SelectedVehicule = Vehicules.FirstOrDefault(x => x.ID == vehiculeID.Value) ?? Vehicules.FirstOrDefault();
         }
 
         private void FillVehicules()
@@ -138,22 +176,25 @@ namespace ETL.Prototype.ViewModels
             SelectedVehicule = null;
             Vehicules.Clear();
 
-            if (!_allPositions.Any()) return;
+            if (!IsConnected) return;
 
-            var vehiculesIDs = _allPositions.Select(x => x.VehiculeID).Distinct().ToList();
-
-            foreach(var vehiculeID in vehiculesIDs)
+            var vehicules = Enumerable.Empty<IVehicule>();
+            using (var service = ServiceFactories.CreateETLService())
             {
-                if (Vehicules.Any(x => x.ID == vehiculeID)) continue;
-                var firstVehiculeWithSameID = _allPositions.FirstOrDefault(x => x.VehiculeID == vehiculeID);
-                if (firstVehiculeWithSameID == null) continue;
+                service.ErrorOccured += OnErrorOccured;
+                vehicules = service.GetVehicules(Token);
+            }
 
-                Vehicules.Add(firstVehiculeWithSameID.Vehicule);
+            if (vehicules == null) return;
+            foreach(var vehicule in vehicules)
+            {
+                Vehicules.Add(new VehiculeViewModel(vehicule));
             }
         }
 
         private void ConnectCommandMethod(object sender)
         {
+            Closing();
             LoginToETL();
         }
 
@@ -167,42 +208,11 @@ namespace ETL.Prototype.ViewModels
         private void FillViewModel()
         {
             LoginToETL();
-            GetPositions();
-        }
-
-        private void GetPositions()
-        {
-            var positionEventID = SelectedPosition == null ? (long?)null : SelectedPosition.EventID;
-            var vehiculeID = SelectedVehicule == null ? (int?)null : SelectedVehicule.ID;
-
-            _allPositions.Clear();
-
-            if (!IsConnected) return;
-
-            var positions = Enumerable.Empty<IPositionVehicule>();
-            using (var service = ServiceFactories.CreateETLService())
-            {
-                service.ErrorOccured += OnErrorOccured;
-                positions = service.GetPositions(Token);
-            }
-
-            _allPositions.AddRange(positions.Select(x => new PositionVehiculeViewModel(x)));
             FillVehicules();
-            FillPositions();
 
-            if (vehiculeID.HasValue)
-                SelectedVehicule = Vehicules.FirstOrDefault(x => x.ID == vehiculeID.Value);
-
-            if (positionEventID.HasValue)
-                SelectedPosition = Positions.FirstOrDefault(x => x.EventID == positionEventID.Value);
+            SelectedVehicule = Vehicules.FirstOrDefault();
         }
-
-        private void FillPositions()
-        {
-            SelectedPosition = null;
-            Positions.Clear();
-        }
-
+        
         private void LoginToETL()
         {
             using (var service = ServiceFactories.CreateETLService())

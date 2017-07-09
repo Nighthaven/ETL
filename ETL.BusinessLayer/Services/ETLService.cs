@@ -13,15 +13,18 @@ namespace ETL.BusinessLayer.Services
     internal class ETLService : Service, IETLService
     {
         private IAuthentificationService _authentificationService;
-        private IReportService _reportService;
+        private IStaticService _staticService;
+        private IEventService _eventService;
 
-        internal ETLService(IAuthentificationService pAuthentificationService, IReportService pReportService)
+        internal ETLService(IAuthentificationService pAuthentificationService, IStaticService pStaticService, IEventService pEventService)
         {
             if (pAuthentificationService == null) throw new ArgumentNullException("pAuthentificationService");
-            if (pReportService == null) throw new ArgumentNullException("pReportService");
+            if (pStaticService == null) throw new ArgumentNullException("pStaticService");
+            if (pEventService == null) throw new ArgumentNullException("pEventService");
 
             _authentificationService = pAuthentificationService;
-            _reportService = pReportService;
+            _staticService = pStaticService;
+            _eventService = pEventService;
         }
 
         public override void Dispose()
@@ -38,7 +41,7 @@ namespace ETL.BusinessLayer.Services
             if (pDispose)
             {
                 _authentificationService = null;
-                _reportService = null;
+                _staticService = null;
                 UnsubscribeEvents();
             }
             
@@ -59,19 +62,34 @@ namespace ETL.BusinessLayer.Services
                 return null;
             }
         }
-
-        public IEnumerable<IPositionVehicule> GetPositions(IAuthentificationToken pToken)
+        
+        public IEnumerable<IPosition> GetPositions(IAuthentificationToken pToken, IVehicule pVehicule)
         {
             if (CheckIsDisposed()) return null;
 
             try
             {
-                return _reportService.GetPositionsVehiculesForToday(pToken);
+                return _eventService.GetPositionsForToday(pToken, pVehicule);
             }
             catch (Exception exception)
             {
                 SendError(exception.Message);
-                return null;
+                return Enumerable.Empty<IPosition>();
+            }
+        }
+
+        public IEnumerable<IVehicule> GetVehicules(IAuthentificationToken pToken)
+        {
+            if (CheckIsDisposed()) return null;
+
+            try
+            {
+                return _staticService.GetVehicules(pToken);
+            }
+            catch (Exception exception)
+            {
+                SendError(exception.Message);
+                return Enumerable.Empty<IVehicule>();
             }
         }
 
