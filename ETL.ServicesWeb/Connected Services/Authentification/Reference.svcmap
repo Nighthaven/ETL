@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="8f5343ad-759e-4004-b5b0-195249db97e8" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="5529fe6b-7ac3-4dd7-8b44-18859fd1fa23" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -24,8 +24,8 @@
     <MetadataSource Address="https://ppws.astus.com/2010/11/AuthenticationService.asmx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="AuthenticationService.disco" MetadataType="Disco" ID="bd0126ad-6970-4085-9051-3a349565133f" SourceId="1" SourceUrl="https://ppws.astus.com/2010/11/AuthenticationService.asmx?disco" />
-    <MetadataFile FileName="AuthenticationService.wsdl" MetadataType="Wsdl" ID="d1e14896-2968-4170-9519-797b45a419b9" SourceId="1" SourceUrl="https://ppws.astus.com/2010/11/AuthenticationService.asmx?wsdl" />
+    <MetadataFile FileName="AuthenticationService.disco" MetadataType="Disco" ID="2afcac36-72d4-41ee-8c2d-b841ba20e82e" SourceId="1" SourceUrl="https://ppws.astus.com/2010/11/AuthenticationService.asmx?disco" />
+    <MetadataFile FileName="AuthenticationService.wsdl" MetadataType="Wsdl" ID="fb652503-96fe-4c61-bb21-240e20e9abb1" SourceId="1" SourceUrl="https://ppws.astus.com/2010/11/AuthenticationService.asmx?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

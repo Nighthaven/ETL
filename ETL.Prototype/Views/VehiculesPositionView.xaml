@@ -4,13 +4,31 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="ETL - Prototype - Étienne Faucher" Height="300" Width="300">
+        Title="ETL - Prototype - Étienne Faucher" Height="1000" Width="1000"
+        Closing="Window_Closing">
     <DockPanel Margin="5">
         <Border DockPanel.Dock="Bottom" Padding="5" BorderBrush="Black" BorderThickness="1" CornerRadius="5">
-            
-        </Border>
-        <DockPanel>
 
+        </Border>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <TextBlock Text="Nom d'usager:" FontWeight="Bold" Margin="0,0,5,0" VerticalAlignment="Center"/>
+            <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Width="200" Margin="0,0,15,0"/>
+            <TextBlock Text="Mot de passe:" FontWeight="Bold" Margin="0,0,5,0" VerticalAlignment="Center" />
+            <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Width="200" Margin="0,0,15,0" />
+            <Button Content="Connexion" Command="{Binding ConnectCommand}" Padding="5,0"/>
+            <CheckBox IsEnabled="False" IsChecked="{Binding IsConnected, Mode=OneWay}" VerticalAlignment="Center" Template="{StaticResource ConnectionCheckBox}" Height="20px"/> 
+        </StackPanel>
+        <DockPanel>
+            <GroupBox Header="Véhicules">
+                <DockPanel>
+                    <DockPanel>
+                        
+                    </DockPanel>
+                    <DockPanel>
+                        
+                    </DockPanel>
+                </DockPanel>
+            </GroupBox>
         </DockPanel>
     </DockPanel>
 </Window>

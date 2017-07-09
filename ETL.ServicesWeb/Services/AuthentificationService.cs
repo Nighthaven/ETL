@@ -20,16 +20,26 @@ namespace ETL.ServicesWeb.Services
             _client = pClient;
         }
 
+        public bool Close(IAuthentificationToken pToken)
+        {
+            if (pToken == null) throw new ArgumentNullException("pToken");
+
+            var token = new Token() { Value = pToken.Value };
+            var authenticateRequest = new AuthenticatedRequest() { UnsafeToken = token };
+            _client.CloseSession(authenticateRequest);
+            
+            return true;
+        }
+
         public IAuthentificationToken Login(string pUsername, string pPassword)
         {
             if (string.IsNullOrWhiteSpace(pUsername)) throw new ArgumentNullException("pUsername");
             if (string.IsNullOrWhiteSpace(pPassword)) throw new ArgumentNullException("pPassword");
 
             var openSessionRequest = new OpenSessionRequest() { Username = pUsername, Password = pPassword };
-
             var openSessionResponse = _client.OpenSession(openSessionRequest);
-            
-            if(!openSessionResponse.IsAuthenticated) { return null; }
+
+            if (!openSessionResponse.IsAuthenticated) { return null; }
 
             return new AuthentificationToken() { Value = openSessionResponse.Token.Value, FleetOwnerID = openSessionResponse.FleetOwnerID };
         }

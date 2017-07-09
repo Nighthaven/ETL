@@ -45,7 +45,30 @@ namespace ETL.BusinessLayer.Services
         {
             if (CheckIsDisposed()) return null;
 
-            return _authentificationService.Login(pUsername, pPassword);
+            try
+            {
+                return _authentificationService.Login(pUsername, pPassword);
+            }
+            catch (Exception exception)
+            {
+                SendError(exception.Message);
+                return null;
+            }
+        }
+
+        public void CloseSession(IAuthentificationToken pToken)
+        {
+            if (pToken == null) throw new ArgumentNullException("pToken");
+            if (CheckIsDisposed()) return;
+
+            try
+            {
+                _authentificationService.Close(pToken);
+            }
+            catch (Exception exception)
+            {
+                SendError(exception.Message);
+            }
         }
     }
 }

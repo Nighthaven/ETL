@@ -25,6 +25,12 @@ namespace ETL.BusinessLayer.Services
             return true;
         }
 
+        protected void SendError(string pMessage)
+        {
+            if(ErrorOccured != null)
+                ErrorOccured(this, new ErrorEventArgs() { Message = pMessage });
+        }
+
         protected void UnsubscribeEvents()
         {
             if (ErrorOccured != null)

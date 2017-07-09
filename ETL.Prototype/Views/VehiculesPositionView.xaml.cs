@@ -42,5 +42,10 @@ namespace ETL.Prototype.Views
         {
             MessageBox.Show(this, pEventArgs.Message, "Erreur!", MessageBoxButton.OK, MessageBoxImage.Error);
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            ViewModel.Closing();
+        }
     }
 }

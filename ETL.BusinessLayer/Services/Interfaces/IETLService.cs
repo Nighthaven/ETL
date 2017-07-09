@@ -10,5 +10,6 @@ namespace ETL.BusinessLayer.Services.Interfaces
     public interface IETLService : IService
     {
         IAuthentificationToken Login(string pUsername, string pPassword);
+        void CloseSession(IAuthentificationToken pToken);
     }
 }

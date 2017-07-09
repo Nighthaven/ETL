@@ -16,6 +16,7 @@ namespace ETL.Prototype
         private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
             MessageBox.Show(e.Exception.Message, "Erreur non captée !");
+            e.Handled = true;
         }
     }
 }

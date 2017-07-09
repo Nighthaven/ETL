@@ -60,7 +60,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Utilitaires\ConfigUtils.cs" />
+    <Compile Include="Utilitaires\RelayCommand.cs" />
     <Compile Include="ViewModels\VehiculePositionViewViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\VehiculesPositionView.xaml.cs">
       <DependentUpon>VehiculesPositionView.xaml</DependentUpon>
     </Compile>
@@ -102,15 +104,26 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Dictionaries\Images.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dictionaries\Templates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\VehiculesPositionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Dictionaries\" />
     <Folder Include="Events\" />
     <Folder Include="ViewModels\Objects\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Media\image_001_32_00.png" />
+    <Resource Include="Media\image_002_32_00.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -10,5 +10,6 @@ namespace ETL.ServicesWeb.Services.Interfaces
     public interface IAuthentificationService
     {
         IAuthentificationToken Login(string pUsername, string pPassword);
+        bool Close(IAuthentificationToken pToken);
     }
 }
