@@ -1,17 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 
 namespace ETL.Prototype.ViewModels
 {
     public abstract class ViewModelBase : INotifyPropertyChanged
     {
+        #region Events
+
+        #region Implemented
+
         public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
+
+        #endregion
+
+        #region Methods
 
         protected bool SetField<T>(ref T pField, T pValue, [CallerMemberName] string pPropertyName = null)
         {
@@ -44,5 +51,7 @@ namespace ETL.Prototype.ViewModels
 
             return body.Member.Name;
         }
+
+        #endregion
     }
 }

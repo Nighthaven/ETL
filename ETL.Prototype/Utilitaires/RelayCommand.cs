@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace ETL.Prototype.Utilitaires
@@ -10,10 +6,47 @@ namespace ETL.Prototype.Utilitaires
     // Source: https://stackoverflow.com/a/22286816/5785572
     public class RelayCommand : ICommand
     {
+        #region Events
+
+        #region Implemented
+
+        ///<summary>
+        ///Occurs when changes occur that affect whether or not the command should execute.
+        ///</summary>
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
+
+        #endregion
+
+        #endregion
+
         #region Fields
 
         private Action<object> _execute;
         private Func<object, bool> _canExecute;
+
+        #endregion
+
+        #region Properties
+
+        #region Implemented
+
+        ///<summary>
+        ///Defines the method that determines whether the command can execute in its current state.
+        ///</summary>
+        ///<param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
+        ///<returns>
+        ///true if this command can be executed; otherwise, false.
+        ///</returns>
+        public bool CanExecute(object parameter)
+        {
+            return _canExecute == null ? true : _canExecute(parameter);
+        }
+
+        #endregion
 
         #endregion
 
@@ -45,28 +78,9 @@ namespace ETL.Prototype.Utilitaires
 
         #endregion
 
-        #region ICommand Members
+        #region Methods
 
-        ///<summary>
-        ///Defines the method that determines whether the command can execute in its current state.
-        ///</summary>
-        ///<param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
-        ///<returns>
-        ///true if this command can be executed; otherwise, false.
-        ///</returns>
-        public bool CanExecute(object parameter)
-        {
-            return _canExecute == null ? true : _canExecute(parameter);
-        }
-
-        ///<summary>
-        ///Occurs when changes occur that affect whether or not the command should execute.
-        ///</summary>
-        public event EventHandler CanExecuteChanged
-        {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
-        }
+        #region Implemented
 
         ///<summary>
         ///Defines the method to be called when the command is invoked.
@@ -76,6 +90,8 @@ namespace ETL.Prototype.Utilitaires
         {
             _execute(parameter);
         }
+
+        #endregion
 
         #endregion
     }

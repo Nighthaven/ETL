@@ -1,17 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using ETL.BusinessObjects;
-using ETL.ServicesWeb.Services.Interfaces;
 using ETL.ServicesWeb.Authentification;
+using ETL.ServicesWeb.Services.Interfaces;
 
 namespace ETL.ServicesWeb.Services
 {
     internal class AuthentificationService : IAuthentificationService
     {
+        #region Fields
+
         private readonly AuthorizationContractClient _client;
+
+        #endregion
+        
+        #region Constructors
 
         internal AuthentificationService(AuthorizationContractClient pClient)
         {
@@ -19,6 +22,12 @@ namespace ETL.ServicesWeb.Services
 
             _client = pClient;
         }
+
+        #endregion
+
+        #region Methods
+
+        #region Implemented
 
         public bool Close(IAuthentificationToken pToken)
         {
@@ -43,5 +52,9 @@ namespace ETL.ServicesWeb.Services
 
             return new AuthentificationToken() { Value = openSessionResponse.Token.Value, FleetOwnerID = openSessionResponse.FleetOwnerID };
         }
+
+        #endregion
+
+        #endregion
     }
 }

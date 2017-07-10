@@ -1,17 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using ETL.BusinessObjects;
-using ETL.ServicesWeb.Services.Interfaces;
 using ETL.ServicesWeb.Static;
+using ETL.ServicesWeb.Services.Interfaces;
 
 namespace ETL.ServicesWeb.Services
 {
     internal class StaticService : IStaticService
     {
+        #region Fields
+
         private readonly StaticContractClient _client;
+
+        #endregion
+
+        #region Constructors
 
         internal StaticService(StaticContractClient pClient)
         {
@@ -19,6 +24,12 @@ namespace ETL.ServicesWeb.Services
 
             _client = pClient;
         }
+
+        #endregion
+
+        #region Methods
+
+        #region Implemented
 
         public IEnumerable<IVehicule> GetVehicules(IAuthentificationToken pToken)
         {
@@ -29,8 +40,12 @@ namespace ETL.ServicesWeb.Services
             var response = _client.GetVehicles(authenticatedRequest);
 
             if (response == null) return Enumerable.Empty<IVehicule>();
-            
+
             return response.ConvertToVehicules().ToList();
         }
+
+        #endregion
+
+        #endregion
     }
 }

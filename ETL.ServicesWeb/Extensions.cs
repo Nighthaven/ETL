@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using ETL.BusinessObjects;
-using ETL.ServicesWeb.Static;
 using ETL.ServicesWeb.Event;
+using ETL.ServicesWeb.Static;
 
 namespace ETL.ServicesWeb
 {

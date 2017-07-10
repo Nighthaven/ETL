@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ETL.ServicesWeb.Services;
 using ETL.ServicesWeb.Services.Interfaces;
-using ETL.ServicesWeb.Services;
 
 namespace ETL.ServicesWeb
 {

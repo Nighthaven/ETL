@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ETL.BusinessObjects
+﻿namespace ETL.BusinessObjects
 {
     public class AuthentificationToken : IAuthentificationToken
     {
+        #region Properties
+
+        #region Implemented
+
         public string Value { get; set; }
         public int FleetOwnerID { get; set; }
+
+        #endregion
+
+        #endregion
     }
 }

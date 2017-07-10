@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ETL.BusinessObjects;
+﻿using ETL.BusinessObjects;
 
 namespace ETL.ServicesWeb.Services.Interfaces
 {
     public interface IAuthentificationService
     {
+        #region Methods
+
         IAuthentificationToken Login(string pUsername, string pPassword);
         bool Close(IAuthentificationToken pToken);
+
+        #endregion
     }
 }

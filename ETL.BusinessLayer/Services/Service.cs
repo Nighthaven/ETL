@@ -1,20 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ETL.BusinessLayer.Events;
+﻿using ETL.BusinessLayer.Events;
 using ETL.BusinessLayer.Services.Interfaces;
 
 namespace ETL.BusinessLayer.Services
 {
     public abstract class Service : IService
     {
-        protected bool _disposed;
+        #region Events
+
+        #region Implemented
+
         public event ErrorEventHandler ErrorOccured;
 
+        #endregion
+
+        #endregion
+
+        #region Fields
+
+        protected bool _disposed;
+
+        #endregion
+
+        #region Methods
+
+        #region Implemented
+        
         public abstract void Dispose();
 
+        #endregion
+        
         protected bool CheckIsDisposed()
         {
             if (!_disposed) return false;
@@ -27,15 +41,21 @@ namespace ETL.BusinessLayer.Services
 
         protected void SendError(string pMessage)
         {
-            if(ErrorOccured != null)
+            if (ErrorOccured != null)
                 ErrorOccured(this, new ErrorEventArgs() { Message = pMessage });
         }
 
         protected void UnsubscribeEvents()
         {
             if (ErrorOccured != null)
-                foreach (var d in ErrorOccured.GetInvocationList())
-                    ErrorOccured -= (d as ErrorEventHandler);
+            {
+                foreach (var delegateMethod in ErrorOccured.GetInvocationList())
+                {
+                    ErrorOccured -= (delegateMethod as ErrorEventHandler);
+                }
+            }
         }
+
+        #endregion
     }
 }

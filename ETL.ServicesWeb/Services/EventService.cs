@@ -1,17 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using ETL.BusinessObjects;
-using ETL.ServicesWeb.Services.Interfaces;
 using ETL.ServicesWeb.Event;
+using ETL.ServicesWeb.Services.Interfaces;
 
 namespace ETL.ServicesWeb.Services
 {
     internal class EventService : IEventService
     {
+        #region Fields
+
         private readonly EventContractClient _client;
+
+        #endregion
+
+        #region Constructors
 
         internal EventService(EventContractClient pClient)
         {
@@ -19,6 +24,12 @@ namespace ETL.ServicesWeb.Services
 
             _client = pClient;
         }
+
+        #endregion
+
+        #region Methods
+
+        #region Implemented
 
         public IEnumerable<IPosition> GetPositionsForToday(IAuthentificationToken pToken, IVehicule pVehicule)
         {
@@ -43,6 +54,9 @@ namespace ETL.ServicesWeb.Services
 
             return response.ConvertToPositions().ToList();
         }
-        
+
+        #endregion
+
+        #endregion
     }
 }

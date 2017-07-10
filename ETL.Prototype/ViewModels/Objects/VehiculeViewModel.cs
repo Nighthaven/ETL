@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ETL.BusinessObjects;
 
 namespace ETL.Prototype.ViewModels
 {
     public class VehiculeViewModel : ViewModelBase
     {
+        #region Properties
+
         public int ID { get; private set; }
         public string Name { get; private set; }
         public string PlateNumber { get; private set; }
@@ -16,6 +14,10 @@ namespace ETL.Prototype.ViewModels
         public string Model { get; private set; }
         public string StringToShow { get { return string.Format("{0} - {1}", Name, PlateNumber); } }
         internal IVehicule Data { get; private set; }
+
+        #endregion
+
+        #region Constructors
 
         public VehiculeViewModel(IVehicule pVehicule)
         {
@@ -29,6 +31,6 @@ namespace ETL.Prototype.ViewModels
             Data = pVehicule;
         }
 
-
+        #endregion
     }
 }

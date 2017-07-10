@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ETL.BusinessLayer.Services.Interfaces;
+﻿using ETL.BusinessLayer.Services.Interfaces;
 using ETL.BusinessLayer.Services;
 
 namespace ETL.BusinessLayer
@@ -15,6 +10,7 @@ namespace ETL.BusinessLayer
             var authentificationService = ServicesWeb.ServiceFactories.CreateAuthentificationService();
             var staticService = ServicesWeb.ServiceFactories.CreateStaticService();
             var eventService = ServicesWeb.ServiceFactories.CreateEventService();
+
             return new ETLService(authentificationService, staticService, eventService);
         }
     }
